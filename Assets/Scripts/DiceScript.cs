@@ -2,29 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum DiceType {D20, D12, D10, D8, D6, D4, D0};
+public enum DiceType { D20, D12, D10, D8, D6, D4, D0 };
 
 public class DiceScript : MonoBehaviour
-{   
+{
     [SerializeField] public DiceType type;
     [SerializeField] private int sides;
     [SerializeField] private float time;
     [SerializeField] private float elapsedTime;
 
-    public void GenerateStats(DiceType type){
+    public void GenerateStats(DiceType type)
+    {
         this.type = type;
         this.sides = GetSides(type);
         time = sides;
         elapsedTime = 0;
     }
 
-    public int GetFrames(int sides){
+    public int GetFrames(int sides)
+    {
         return sides * 50;
     }
 
-    public void ElapseFrame(float time){
+    public void ElapseFrame(float time)
+    {
         elapsedTime += time;
-        if (elapsedTime >= time){
+        if (elapsedTime >= time)
+        {
             // need to evolve
             type = AdvanceDice(type);
             sides = GetSides(type);
@@ -33,12 +37,14 @@ public class DiceScript : MonoBehaviour
         }
     }
 
-    public void Expire(){
+    public void Expire()
+    {
         this.transform.parent.GetComponent<DiceTree>().Rot();
         Destroy(this.gameObject, 0f);
     }
 
-    public DiceType AdvanceDice(DiceType type){
+    public DiceType AdvanceDice(DiceType type)
+    {
         switch (type)
         {
             case DiceType.D20: return DiceType.D12;
@@ -51,7 +57,8 @@ public class DiceScript : MonoBehaviour
         }
     }
 
-    public int GetSides(DiceType type){
+    public int GetSides(DiceType type)
+    {
         switch (type)
         {
             case DiceType.D20: return 20; 
@@ -63,5 +70,4 @@ public class DiceScript : MonoBehaviour
             default: return 0;
         }
     }
-
 }
