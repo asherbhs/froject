@@ -36,7 +36,7 @@ public class DiceTree : MonoBehaviour
         if (dice.IsExpired()) timeSinceDiceExpired += dt;
 
         // update the dice
-        dice.FixedUpdate(dt);
+        dice.FixedUpdate(dt, IsThirsty());
         if (dice.IsExpired())
         {
             status = Status.Rotten;

@@ -26,10 +26,10 @@ public class Dice
 
     public bool IsExpired() { return diceType == DiceType.Expired; }
 
-    public void FixedUpdate(float dt)
+    public void FixedUpdate(float dt, bool treeIsThirsty)
     {
         timeSinceLastChange += dt;
-        if (timeSinceLastChange >= (float) diceType)
+        if (timeSinceLastChange >= (float) diceType && !treeIsThirsty)
         {
             switch (diceType)
             {
