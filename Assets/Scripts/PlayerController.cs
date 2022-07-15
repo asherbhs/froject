@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-	private float speed = 0.1f;
+	private float speed;
+	private ITool tool;
+	private Rigidbody2D rb2d;
 
-	private ITool tool = null;
-
-	// Start is called before the first frame update
-	void Start() {}
-
-	// Update is called once per frame
-	void Update()
+	void Awake()
 	{
-		// move according to user input
-		transform.Translate
+		speed = 5f;
+		tool = null;
+		rb2d = GetComponent<Rigidbody2D>();
+	}
+
+	void FixedUpdate()
+	{
+		rb2d.MovePosition
 		(
-			Input.GetAxis("Horizontal") * speed, // x
-			Input.GetAxis("Vertical")   * speed, // y
-			0 // z (none since it's a 2d game)
+			rb2d.position + speed * Time.fixedDeltaTime * new Vector2
+			(
+				Input.GetAxis("Horizontal"),
+				Input.GetAxis("Vertical")
+			)
 		);
 	}
 }
