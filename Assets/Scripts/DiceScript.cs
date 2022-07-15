@@ -22,8 +22,8 @@ public class DiceScript : MonoBehaviour
         return sides * 50;
     }
 
-    public void ElapseFrame(){
-        elapsedTime += 1;
+    public void ElapseFrame(int time){
+        elapsedTime += time;
         if (elapsedTime >= time){
             // need to evolve
             type = AdvanceDice(type);
