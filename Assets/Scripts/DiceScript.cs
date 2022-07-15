@@ -14,7 +14,7 @@ public class DiceScript : MonoBehaviour
     public void GenerateStats(DiceType type){
         this.type = type;
         this.sides = GetSides(type);
-        frames = sides;
+        time = sides;
         elapsedTime = 0;
     }
 
@@ -22,7 +22,7 @@ public class DiceScript : MonoBehaviour
         return sides * 50;
     }
 
-    public void ElapseFrame(int time){
+    public void ElapseFrame(float time){
         elapsedTime += time;
         if (elapsedTime >= time){
             // need to evolve
