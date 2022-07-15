@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class WateringCan : ITool
 {
-    public void DoWorkOn(DiceTree dt) { dt.Water(); }
+    public void DoWorkOn(Tree tree) { tree.Water(); }
 }
