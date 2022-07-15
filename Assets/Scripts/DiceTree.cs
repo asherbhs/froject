@@ -17,7 +17,6 @@ public class DiceTree : MonoBehaviour
     {
         status = Status.Healthy;
         elapsedFrames = 0;
-        Debug.Log("!");
         GenerateDice();
     }
 
@@ -56,7 +55,6 @@ public class DiceTree : MonoBehaviour
 
     public void GenerateDice()
     {
-        Debug.Log("GEN");
         dice = Instantiate(dicePrefab, this.transform);
         diceScript = dice.AddComponent<DiceScript>();
         diceScript.GenerateStats(0);
