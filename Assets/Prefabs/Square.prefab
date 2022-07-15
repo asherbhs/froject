@@ -146,3 +146,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2de7b6b8a3ebeb94587e22882e242287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dice: {fileID: 0}
+  dicePrefab: {fileID: 7106075121008891452, guid: 67b7548375d8b4543bb1fc4a6c3977c5, type: 3}

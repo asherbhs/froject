@@ -4,14 +4,14 @@ using UnityEngine;
 
 public enum DiceType {D20, D12, D10, D8, D6, D4, D0};
 
-public class Dice : MonoBehaviour
+public class DiceScript : MonoBehaviour
 {   
-    public DiceType type;
-    private int sides;
-    private int frames;
-    private int elapsedFrames;
+    [SerializeField] public DiceType type;
+    [SerializeField] private int sides;
+    [SerializeField] private int frames;
+    [SerializeField] private int elapsedFrames;
 
-    public Dice(DiceType type){
+    public void GenerateStats(DiceType type){
         this.type = type;
         this.sides = GetSides(type);
         frames = GetFrames(sides);
@@ -33,6 +33,11 @@ public class Dice : MonoBehaviour
         }
     }
 
+    public void Expire(){
+        this.transform.parent.GetComponent<DiceTree>().Rot();
+        Destroy(this.gameObject, 0f);
+    }
+
     public DiceType AdvanceDice(DiceType type){
         switch (type)
         {
@@ -42,7 +47,7 @@ public class Dice : MonoBehaviour
             case DiceType.D8: return DiceType.D6;
             case DiceType.D6: return DiceType.D4;
             case DiceType.D4: return DiceType.D0;
-            default: return DiceType.D0;
+            default: Expire(); return DiceType.D0;
         }
     }
 

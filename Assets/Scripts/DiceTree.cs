@@ -9,19 +9,33 @@ public class DiceTree : MonoBehaviour
 {   
 
     private int elapsedFrames;
-    private Dice dice;
+    public GameObject dice;
+    public DiceScript diceScript;
     private Status status;
+    private float statusTimer;
+    [SerializeField] private GameObject dicePrefab;
     // Start is called before the first frame update
     void Start()
     {   
+        status = Status.Healthy;
         elapsedFrames = 0;
-        dice = GenerateDice();
+        Debug.Log("!");
+        GenerateDice();
     }
 
     void FixedUpdate()
     {
         //update the dice
         FrameAction();
+        statusTimer -= Time.deltaTime;
+        if (statusTimer <= 0){
+            status = Status.Healthy;
+        }
+    }
+
+    public void Rot(){
+        GenerateDice();
+        this.status = Status.Rotten;
     }
 
     public void SetStatus(Status stat){
@@ -30,12 +44,15 @@ public class DiceTree : MonoBehaviour
 
     private void FrameAction(){
         if (status == Status.Healthy){
-            dice.ElapseFrame();
+            diceScript.ElapseFrame();
             elapsedFrames = 0;
         }
     }
 
-    public Dice GenerateDice(){
-        return new Dice(DiceType.D20);
+    public void GenerateDice(){
+        Debug.Log("GEN");
+        dice = Instantiate(dicePrefab, this.transform);
+        diceScript = dice.AddComponent<DiceScript>();
+        diceScript.GenerateStats(0);
     }
 }
