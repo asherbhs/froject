@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
 	private float speed = 0.1f;
 
+	private ITool tool = null;
+
 	// Start is called before the first frame update
 	void Start() {}
 
