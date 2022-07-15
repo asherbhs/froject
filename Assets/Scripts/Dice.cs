@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum DiceType {D20, D12, D10, D8, D6, D4, D0};
+
 public class Dice : MonoBehaviour
 {   
     enum DiceType {D20, D12, D10, D8, D6, D4, D0};
@@ -15,15 +17,22 @@ public class Dice : MonoBehaviour
 
     public Dice(int sides){
         this.sides = sides;
-        frames = sides * 50;
+        frames = GetFrames(sides);
         elapsedFrames = 0;
     };
+
+    public int GetFrames(int sides){
+        return sides * 50;
+    }
 
     public void ElapseFrame(){
         elapsedFrames += 1;
         if (elapsedFrames >= frames){
             // need to evolve
-            sides = 
+            type = AdvanceDice(type);
+            sides = GetSides(type);
+            frames = GetFrames(sides);
+            elapsedFrames = 0;
         }
     }
 
@@ -37,6 +46,19 @@ public class Dice : MonoBehaviour
             case D6: D4;
             case D4: D0;
             default: D0;
+        }
+    }
+
+    public int GetSides(DiceType type){
+        switch (type)
+        {
+            case D20: 20;
+            case D12: 12;
+            case D10: 10;
+            case D8: 8;
+            case D6: 6;
+            case D4: 4;
+            default: 0;
         }
     }
 
