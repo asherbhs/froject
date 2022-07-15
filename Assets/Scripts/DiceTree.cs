@@ -26,7 +26,7 @@ public class DiceTree : MonoBehaviour
     void FixedUpdate()
     {
         //update the dice
-        FrameAction();
+        FrameAction(Time.deltaTime);
         statusTimer -= Time.deltaTime;
         if (statusTimer <= 0){
             status = Status.Healthy;
@@ -42,10 +42,11 @@ public class DiceTree : MonoBehaviour
         status = stat;
     }
 
-    private void FrameAction(){
+    private void FrameAction(float time){
         if (status == Status.Healthy){
-            diceScript.ElapseFrame();
-            elapsedFrames = 0;
+            diceScript.ElapseFrame(time);
+        } else if (status == Status.Thirsty){
+            diceScript.ElapseFrame(time / 2.0f);
         }
     }
 

@@ -8,14 +8,14 @@ public class DiceScript : MonoBehaviour
 {   
     [SerializeField] public DiceType type;
     [SerializeField] private int sides;
-    [SerializeField] private int frames;
-    [SerializeField] private int elapsedFrames;
+    [SerializeField] private float time;
+    [SerializeField] private float elapsedTime;
 
     public void GenerateStats(DiceType type){
         this.type = type;
         this.sides = GetSides(type);
-        frames = GetFrames(sides);
-        elapsedFrames = 0;
+        frames = sides;
+        elapsedTime = 0;
     }
 
     public int GetFrames(int sides){
@@ -23,13 +23,13 @@ public class DiceScript : MonoBehaviour
     }
 
     public void ElapseFrame(){
-        elapsedFrames += 1;
-        if (elapsedFrames >= frames){
+        elapsedTime += 1;
+        if (elapsedTime >= time){
             // need to evolve
             type = AdvanceDice(type);
             sides = GetSides(type);
-            frames = GetFrames(sides);
-            elapsedFrames = 0;
+            time = sides;
+            elapsedTime = 0;
         }
     }
 
